@@ -9,11 +9,6 @@ export default function SearchResult({post}) {
               <div className="col-md-12">
                 <div className="card-body px-0 py-2">
                   <div className="card-text" dangerouslySetInnerHTML={{__html: post.title.rendered}}></div>
-                    <div className="text-muted d-flex align-items-center justify-content-end">
-                      <div style={{marginLeft: '6px'}}>
-                        {(Math.floor(Math.random() * 100) + 1)} Likes
-                      </div>
-                    </div>
                 </div>
               </div>
             </a>

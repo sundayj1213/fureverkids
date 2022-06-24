@@ -1,6 +1,9 @@
 import ReactPaginate from 'react-paginate';
 
 export default function Pagination(props) {
+
+  if(!props.pageCount) return <></>;
+
   const paginationHandler = (page) => {
 
     if(isNaN(page.selected)) return;
@@ -8,8 +11,13 @@ export default function Pagination(props) {
     if(page.selected + 1 != props.query.page) {
       const currentQuery = props.query;
       currentQuery.page = page.selected ? parseInt(page.selected, 10) + 1: 1;
-
-      window.location.href=`/?page=${currentQuery.page}`;
+      const query = new URLSearchParams({
+        page: currentQuery.page
+      });
+      if(props.query.category) {
+        query.append('category', props.query.category)
+      }
+      window.location.href=`/?${query.toString()}`;
     }
   };
 

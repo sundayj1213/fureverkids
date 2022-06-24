@@ -1,14 +1,12 @@
 const BASE_URL = "https://moneymaker.monster/wp-json/wp/v2";
 
-import { asPath } from 'next/router'
-
 export async function getPosts(args) {
   try {
     const query = new URLSearchParams({
       _embed: '',
       page: 1,
       ...args
-    }).toString()
+    }).toString();
     const postsRes = await fetch(BASE_URL + "/posts?" + query);
     const posts = await postsRes.json();
     return {posts, pageCount: parseInt(postsRes.headers.get('x-wp-totalpages'), 10)};

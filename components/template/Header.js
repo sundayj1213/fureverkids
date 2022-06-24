@@ -1,7 +1,9 @@
-import Link from 'next/link'
+import { useRouter } from 'next/router';
 import Image from 'next/image'
 
 export default function Header() {
+  const router = useRouter();
+
   return (
     <header className='bg-white'>
       <nav className="navbar navbar-expand-lg navbar-light bg-white">
@@ -16,33 +18,44 @@ export default function Header() {
           <div className="collapse navbar-collapse" id="navbarNavDropdown">
             <ul className="navbar-nav w-100 justify-content-evenly">
               <li className="nav-item">
-                <Link href={'/'}>
-                  <a className="nav-link active" aria-current="page">Home</a>
-                </Link>
+                <a 
+                  className={!router.asPath.includes('category') ? 'nav-link active': 'nav-link'} 
+                  href="/">居家</a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">News</a>
+                <a 
+                  className={router.asPath.includes('category=35') ? 'nav-link active': 'nav-link'} 
+                  href="/?category=35">文化</a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">Physical Education</a>
+                <a 
+                  className={router.asPath.includes('category=40') ? 'nav-link active': 'nav-link'} 
+                  href="/?category=40">情感</a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">Entertainment</a>
+                <a 
+                  className={router.asPath.includes('category=30') ? 'nav-link active': 'nav-link'} 
+                  href="/?category=30">娛樂</a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">Car</a>
+                <a 
+                  className={router.asPath.includes('category=45') ? 'nav-link active': 'nav-link'} 
+                  href="/?category=45">商業</a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">Invest</a>
+                <a 
+                  className={router.asPath.includes('category=32') ? 'nav-link active': 'nav-link'} 
+                  href="/?category=32">動漫</a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">Finance</a>
+                <a 
+                  className={router.asPath.includes('category=43') ? 'nav-link active': 'nav-link'} 
+                  href="/?category=43">健身</a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">Military</a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="#">Technology</a>
+                <a 
+                  className={router.asPath.includes('category=26') ? 'nav-link active': 'nav-link'} 
+                  href="/?category=26">健康</a>
               </li>
             </ul>
           </div>

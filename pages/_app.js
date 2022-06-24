@@ -24,6 +24,7 @@ function MyApp({ Component, pageProps }) {
       </div>
       <Footer />
       <script
+        async
         dangerouslySetInnerHTML={{__html: "document.querySelector(`svg[data-bs-target='#navbarNavDropdown']`).addEventListener('click', () => {document.querySelector('#navbarNavDropdown').classList.toggle('show')})"}}>
       </script>
     </>

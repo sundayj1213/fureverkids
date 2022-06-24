@@ -1,15 +1,17 @@
-import Link from "next/link";
+import RelatedPosts from "../../components/post/RelatedPosts";
+import PostExtras from "../../components/post/PostExtras";
 
 import {getPost, getSlugs} from "../../utils/wordpress";
 
-export default function PostPage({post}){
+export default function PostPage({posts, post}){
     return (
-        <div className="container pt-5">
-            <h1 className="text-center pb-5">{post.title.rendered}</h1>
-            <div className="card-text pb-5" dangerouslySetInnerHTML={{__html: post.content.rendered}}></div>
-            <Link href="/">
-                <a className="btn btn-primary">Back to Home</a>
-            </Link>
+        <div className="row">
+            <div className="container-fluid rounded bg-white p-5">
+                <h1 className="mb-4">{post.title.rendered}</h1>
+                <PostExtras post={post} />
+                <div className="card-text text-secondary mt-3" dangerouslySetInnerHTML={{__html: post.content.rendered}}></div>
+            </div>
+            <RelatedPosts posts={posts} />
         </div>
     )
 }
@@ -32,14 +34,13 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
 
-const post = await getPost(params.slug);
+    const result = await getPost(params.slug);
 
-return {
-    props: {
-    post
-    },
-    revalidate: 10, // In seconds
-}
-
+    return {
+        props: {
+            ...result
+        },
+        revalidate: 10, // In seconds
+    }
 }
 

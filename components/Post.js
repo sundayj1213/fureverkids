@@ -1,25 +1,21 @@
 
-import Link from "next/link";
 //to use Image with an external url, add some config on next.config.js
 //for more info, check out these docs https://nextjs.org/docs/basic-features/image-optimization
 
-import {getDate} from "../utils/utils";
+import PostExtras from "./post/PostExtras";
 
 export default function Post({post}) {
-
     return (
-        <div className="card mb-3" style={{maxWidth: "540px"}}>
+        <div className="card border-0">
             <div className="row g-0">
-                <div className="col-md-8">
-                    <div className="card-body">
-                        <h5 className="card-title">{post.title.rendered}</h5>
-                        <div className="card-text" dangerouslySetInnerHTML={{__html: post.excerpt.rendered}}></div>
-                        <p className="card-text"><small className="text-muted">On {getDate(post.modified)}</small></p>
-                        <Link href={`/posts/${post.slug}`}>
-                            <a className="btn btn-primary">See more</a>
-                        </Link>
+                <a href={`/posts/${post.slug}`} className='border-bottom'>
+                    <div className="col-md-12">
+                        <div className="card-body mx-4 px-0 py-4">
+                            <div className="card-text" dangerouslySetInnerHTML={{__html: post.excerpt.rendered}}></div>
+                            <PostExtras post={post} />
+                        </div>
                     </div>
-                </div>
+                </a>
             </div>
         </div>
     )

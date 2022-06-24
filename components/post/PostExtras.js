@@ -22,8 +22,7 @@ export default function PostExtras({post}) {
                 <path d="M8.45703 8.22266C8.00586 8.22266 7.65625 8.57227 7.65625 9.00391C7.65625 9.43555 8.00586 9.78516 8.45703 9.78516C8.86914 9.78516 9.21875 9.43555 9.21875 9.00391C9.21875 8.57227 8.86914 8.22266 8.45703 8.22266Z" fill="#333333"/>
             </svg>
             <div style={{marginLeft: '6px'}}>
-                {(Math.floor(Math.random() * 100) + 1)}
-                Comments
+            {(Math.floor(Math.random() * 100) + 1)} <span> Comments</span>
             </div>
         </div>
     </div>

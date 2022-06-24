@@ -11,7 +11,7 @@ export default function Home({posts, pageCount, query}) {
       <Head>
         <title>FureverKids</title>
       </Head>
-      <div className="rounded">
+      <div className="rounded bg-white">
         {posts.length ? posts.map(post => (
           <Post post={post} key={post.id}/>
         )): (<div className='min-vh-100'>No posts found</div>)}

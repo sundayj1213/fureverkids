@@ -1,4 +1,3 @@
-import Head from 'next/head'
 import Header from '../components/template/Header'
 import Footer from '../components/template/Footer'
 import Search from "../components/Search";
@@ -24,7 +23,9 @@ function MyApp({ Component, pageProps }) {
         </main>
       </div>
       <Footer />
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossOrigin="anonymous" async></script>
+      <script
+        dangerouslySetInnerHTML={{__html: "document.querySelector(`svg[data-bs-target='#navbarNavDropdown']`).addEventListener('click', () => {document.querySelector('#navbarNavDropdown').classList.toggle('show')})"}}>
+      </script>
     </>
   )
     

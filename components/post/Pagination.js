@@ -5,14 +5,16 @@ export default function Pagination(props) {
   const router = useRouter();
 
   const paginationHandler = (page) => {
-    const currentPath = '/';
-    const currentQuery = props.query;
-    currentQuery.page = page.selected ? page.selected + 1: 1;
-
-    router.push({
-        pathname: currentPath,
-        query: currentQuery,
-    });
+    if(page.selected) {
+      const currentPath = '/';
+      const currentQuery = props.query;
+      currentQuery.page = page.selected ? page.selected + 1: 1;
+      
+      router.push({
+          pathname: currentPath,
+          query: currentQuery,
+      });
+    }
   };
 
   return (

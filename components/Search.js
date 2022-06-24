@@ -57,9 +57,10 @@ export default function Search({posts}) {
         </div>
       </div>  
       {
-      active && results ? results.sort(() => Math.random() - 0.5).map(post => (
+        active && results ? (
+          results.length ? results.sort(() => Math.random() - 0.5).map(post => (
           <SearchResult post={post} key={post.id}/>
-        )): <div>Searching...</div>
+        )): <div>Nothing to show</div>): <div>Searching...</div>
       }
     </div>
   );

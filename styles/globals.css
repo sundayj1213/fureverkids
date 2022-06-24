@@ -22,9 +22,32 @@ a {
   border-bottom: 1px solid #FF9100;
 }
 
-.card:last-child a[href*="posts"] {
+[class*="col"] .card:last-child a[href*="posts"] {
   border:0 !important
 }
+
 .form-control:focus {
   box-shadow: none;
+}
+
+
+.pagination a:active, .pagination .active a, .pagination a:hover {
+  background-color: #FF9100;
+  border-radius: 50%;
+  padding: 5px 11px;
+  color: #fff
+}
+
+.pagination [class*="next"] a, .pagination [class*="prev"] a {
+  all: unset;
+}
+
+.pagination [class*="next"] a:hover, .pagination [class*="prev"] a:hover {
+  color: #FF9100;
+}
+
+@media (max-width: 768px) {
+  .bg-sm-white {
+    background-color: #fff;
+  }
 }

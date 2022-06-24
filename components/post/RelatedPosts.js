@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 export default function RelatedPosts({posts}) {
   if(!posts.length) return <></>;
 
@@ -7,13 +9,15 @@ export default function RelatedPosts({posts}) {
       {posts.map(post => (
       <div className="card border-0 text-secondary" key={post.id}>
         <div className="row">
-            <a href={`/posts/${post.slug}`} className='border-bottom'>
+          <Link href={`/posts/${post.slug}`}>
+            <a className='border-bottom'>
                 <div className="col-md-12">
                     <div className="card-body px-0 py-1">
                         <div className="card-text" dangerouslySetInnerHTML={{__html: post.excerpt.rendered}}></div>
                     </div>
                 </div>
             </a>
+            </Link>
         </div>
       </div>
     ))}

@@ -31,7 +31,7 @@ export default function Home({posts, pageCount, query}) {
                   fontWeight: 'normal',
                   padding: '10px',
                 }}>
-                  This page could not be found
+                  Nothing to display
                 </h2>
               </div>
             </div>

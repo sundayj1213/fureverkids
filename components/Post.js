@@ -12,7 +12,7 @@ export default function Post({post}) {
                 <a className='border-bottom'>
                     <div className="col-md-12">
                         <div className="card-body mx-4 px-0 py-4">
-                            <div className="card-text" dangerouslySetInnerHTML={{__html: post.excerpt.rendered}}></div>
+                            <div className="card-text" dangerouslySetInnerHTML={{__html: post.title.rendered}}></div>
                             <PostExtras post={post} />
                         </div>
                     </div>

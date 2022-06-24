@@ -13,7 +13,7 @@ export default function RelatedPosts({posts}) {
             <a className='border-bottom'>
                 <div className="col-md-12">
                     <div className="card-body px-0 py-1">
-                        <div className="card-text" dangerouslySetInnerHTML={{__html: post.excerpt.rendered}}></div>
+                        <div className="card-text" dangerouslySetInnerHTML={{__html: post.title.rendered}}></div>
                     </div>
                 </div>
             </a>

@@ -1,5 +1,22 @@
 const BASE_URL = "https://moneymaker.monster/wp-json/wp/v2";
 
+export async function getCategories(args) {
+  try {
+    const query = new URLSearchParams({
+      _embed: '',
+      page: 1,
+      per_page: 100,
+      exclude: '1,33',
+      ...args
+    }).toString();
+    const postsRes = await fetch(BASE_URL + "/categories?" + query);
+    return await postsRes.json();
+  } catch (e) {
+    console.log(e);
+    return {};
+  }
+}
+
 export async function getPosts(args) {
   try {
     const query = new URLSearchParams({
@@ -9,7 +26,10 @@ export async function getPosts(args) {
     }).toString();
     const postsRes = await fetch(BASE_URL + "/posts?" + query);
     const posts = await postsRes.json();
-    return {posts, pageCount: parseInt(postsRes.headers.get('x-wp-totalpages'), 10)};
+    const categories = await getCategories();
+    const pageCount = parseInt(postsRes.headers.get('x-wp-totalpages'), 10);
+
+    return { posts, pageCount, categories };
   } catch (e) {
     console.log(e);
     return {};
@@ -33,13 +53,9 @@ export async function getPost(slug) {
   }
 }
 
-export async function getSlugs(type) {
-  let elements = [];
-  switch (type) {
-    case "posts":
-      elements = (await getPosts()).posts;
-      break;
-  }
+export async function getSlugs() {
+  let elements = (await getPosts()).posts;
+   
   const elementsIds = elements.map((element) => {
     return {
       params: {
@@ -50,3 +66,32 @@ export async function getSlugs(type) {
   return elementsIds;
 }
 
+export async function getCategoriesSlug() {
+  let elements = await getCategories();
+   
+  const elementsIds = elements.map((element) => {
+    return {
+      params: {
+        slug: element.slug,
+      },
+    };
+  });
+  return elementsIds;
+}
+
+
+export async function getCategoryPost({page, slug}) {
+  try {
+    const result = await getCategories({
+      slug
+    });
+    const category = result.length > 0 ? result[0] : null;
+    return await getPosts({
+      categories: category.id, 
+      page
+    });
+  } catch (e) {
+    console.log(e);
+    return {post: {}, posts: {}};
+  }
+}

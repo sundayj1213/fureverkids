@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import Image from 'next/image'
 
-export default function Header() {
+export default function Header({categories}) {
   const router = useRouter();
 
   return (
@@ -22,41 +22,16 @@ export default function Header() {
                   className={!router.asPath.includes('category') ? 'nav-link active': 'nav-link'} 
                   href="/">居家</a>
               </li>
-              <li className="nav-item">
-                <a 
-                  className={router.asPath.includes('category=35') ? 'nav-link active': 'nav-link'} 
-                  href="/?category=35">文化</a>
-              </li>
-              <li className="nav-item">
-                <a 
-                  className={router.asPath.includes('category=40') ? 'nav-link active': 'nav-link'} 
-                  href="/?category=40">情感</a>
-              </li>
-              <li className="nav-item">
-                <a 
-                  className={router.asPath.includes('category=30') ? 'nav-link active': 'nav-link'} 
-                  href="/?category=30">娛樂</a>
-              </li>
-              <li className="nav-item">
-                <a 
-                  className={router.asPath.includes('category=45') ? 'nav-link active': 'nav-link'} 
-                  href="/?category=45">商業</a>
-              </li>
-              <li className="nav-item">
-                <a 
-                  className={router.asPath.includes('category=32') ? 'nav-link active': 'nav-link'} 
-                  href="/?category=32">動漫</a>
-              </li>
-              <li className="nav-item">
-                <a 
-                  className={router.asPath.includes('category=43') ? 'nav-link active': 'nav-link'} 
-                  href="/?category=43">健身</a>
-              </li>
-              <li className="nav-item">
-                <a 
-                  className={router.asPath.includes('category=26') ? 'nav-link active': 'nav-link'} 
-                  href="/?category=26">健康</a>
-              </li>
+              {
+                categories.length && categories.map(category => (
+                  <li className="nav-item" key={category.id}>
+                    <a 
+                      className={router.asPath.includes(`category/${category.name}`) ? 'nav-link active': 'nav-link'} 
+                      href={`/category/${category.slug}`}>{category.name}</a>
+                  </li>
+                ))
+              }
+             
             </ul>
           </div>
         </div>

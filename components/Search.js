@@ -43,7 +43,7 @@ export default function Search({posts}) {
         <input 
           type="text" 
           className="form-control bg-light border-0 py-3" 
-          placeholder="Search articles here" 
+          placeholder="搜尋文章" 
           aria-label="Recipient's username" 
           aria-describedby="basic-addon2" 
           onChange={onChange}

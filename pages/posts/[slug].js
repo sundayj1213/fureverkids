@@ -19,8 +19,8 @@ export default function PostPage({posts, post}){
 //hey Next, these are the possible slugs
 export async function getStaticPaths() {
 
-    const paths = await getSlugs("posts");
-  
+    const paths = await getSlugs();
+     
     return {
         paths,
         //this option below renders in the server (at request time) pages that were not rendered at build time

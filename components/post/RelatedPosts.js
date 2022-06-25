@@ -5,7 +5,7 @@ export default function RelatedPosts({posts}) {
 
   return (
     <div className="bg-white mt-5 p-5 rounded">
-      <h3 className="mb-4">Related Articles</h3>
+      <h3 className="mb-4">相關文章</h3>
       {posts.map(post => (
       <div className="card border-0 text-secondary" key={post.id}>
         <div className="row">

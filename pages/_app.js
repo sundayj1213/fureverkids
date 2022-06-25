@@ -7,7 +7,7 @@ import '../styles/globals.css'
 function MyApp({ Component, pageProps }) {
   return (
     <>
-      <Header />
+      <Header {...pageProps} />
       <div className='bg-light'>
         <main className="p-lg-5 py-5">
           <div className="container overflow-hidden p-0">

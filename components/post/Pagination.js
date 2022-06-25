@@ -14,10 +14,8 @@ export default function Pagination(props) {
       const query = new URLSearchParams({
         page: currentQuery.page
       });
-      if(props.query.category) {
-        query.append('category', props.query.category)
-      }
-      window.location.href=`/?${query.toString()}`;
+      
+      window.location.href=`?${query.toString()}`;
     }
   };
 

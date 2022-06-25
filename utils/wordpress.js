@@ -48,7 +48,7 @@ export async function searchPosts(query) {
   }
 }
 
-export async function getPost(id) {
+export async function getPost(include) {
   try {
     const {posts: postArray} = await getPosts({id});
     const post = postArray && postArray.length > 0 ? postArray[0] : null;

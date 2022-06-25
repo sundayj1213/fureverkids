@@ -4,7 +4,7 @@ import Pagination from "./Pagination"
 export default function PostList({posts, query, pageCount, categories}) {
   return (
     <>
-      {posts.length ? 
+      {posts && posts.length ? 
         (
           <div className="rounded bg-white">
             {posts.map(post => (

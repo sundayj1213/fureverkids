@@ -12,26 +12,28 @@ export async function getCategories(args) {
     const postsRes = await fetch(BASE_URL + "/categories?" + query);
     return await postsRes.json();
   } catch (e) {
-    console.log(e);
     return {};
   }
 }
 
 export async function getPosts(args) {
   try {
+    const categories = await getCategories();
     const query = new URLSearchParams({
       _embed: '',
       page: 1,
       ...args
     }).toString();
+
     const postsRes = await fetch(BASE_URL + "/posts?" + query);
+
+    if(!postsRes.ok) return {categories};
+
     const posts = await postsRes.json();
-    const categories = await getCategories();
     const pageCount = parseInt(postsRes.headers.get('x-wp-totalpages'), 10);
 
     return { posts, pageCount, categories };
   } catch (e) {
-    console.log(e);
     return {};
   }
 }
@@ -42,7 +44,6 @@ export async function searchPosts(query) {
     const posts = await postsRes.json();
     return { posts };
   } catch (e) {
-    console.log(e);
     return {};
   }
 }
@@ -50,16 +51,16 @@ export async function searchPosts(query) {
 export async function getPost(id) {
   try {
     const {posts: postArray} = await getPosts({id});
-    const post = postArray.length > 0 ? postArray[0] : null;
+    const post = postArray && postArray.length > 0 ? postArray[0] : null;
 
     return {
       ...await getPosts(post ? {
         categories: post.categories.join(",")
       }: {}), 
+      categories: await getCategories(),
       post
     };
   } catch (e) {
-    console.log(e);
     return {post: {}, posts: {}};
   }
 }
@@ -96,13 +97,13 @@ export async function getCategoryPost({page, slug}) {
     const result = await getCategories({
       slug
     });
-    const category = result.length > 0 ? result[0] : null;
+    const category = result.length > 0 ? result[0] : {};
+    
     return await getPosts({
       categories: category.id, 
       page
     });
   } catch (e) {
-    console.log(e);
     return {post: {}, posts: {}};
   }
 }

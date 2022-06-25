@@ -1,7 +1,7 @@
 export default function SearchResult({post, categories}) {
   const category = categories.find( i => i.id == post.categories[0]);
 
-  if(!category) return <></>;
+  if(!category) return <>No Search Results</>;
 
   return (
     <div className="card border-0">

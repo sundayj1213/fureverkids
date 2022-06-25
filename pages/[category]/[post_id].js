@@ -38,10 +38,6 @@ export default function PostPage({posts, post, categories}){
 
 export async function getServerSideProps({ query, res, params }) {
     const result = await getPost(params.post_id);
-    res.setHeader(
-        'Cache-Control',
-        'public, s-maxage=10, stale-while-revalidate=59'
-    );
 
     return {
         props: {

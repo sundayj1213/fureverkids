@@ -44,10 +44,10 @@ export default function Home({posts, pageCount, query}) {
 export async function getServerSideProps(context) {
   // The query params are set on `context.query`
   const { query, res } = context
-  // res.setHeader(
-  //   'Cache-Control',
-  //   'public, s-maxage=10, stale-while-revalidate=59'
-  // );
+  res.setHeader(
+    'Cache-Control',
+    'public, s-maxage=10, stale-while-revalidate=59'
+  );
   if(query.category) {
     query.categories = query.category;
   }

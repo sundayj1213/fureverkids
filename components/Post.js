@@ -1,8 +1,3 @@
-
-//to use Image with an external url, add some config on next.config.js
-//for more info, check out these docs https://nextjs.org/docs/basic-features/image-optimization
-
-import Link from 'next/link';
 import PostExtras from "./post/PostExtras";
 
 export default function Post({post}) {

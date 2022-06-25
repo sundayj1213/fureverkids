@@ -1,5 +1,5 @@
-import PostList from "../../components/post/PostList";
-import {getCategoriesSlug, getCategoryPost, getPost, getSlugs} from "../../utils/wordpress";
+import PostList from "../components/post/PostList";
+import {getCategoriesSlug, getCategoryPost, getSlugs} from "../utils/wordpress";
 
 export default function CategoryPage(pageProps){
   return (
@@ -19,7 +19,7 @@ export async function getServerSideProps({ query, res, params }) {
       query: query,
       ...await getCategoryPost({
         page: query.page ?? 1,
-        slug: params.slug
+        slug: params.category
       })
     }
   }

@@ -13,17 +13,12 @@ export default function Header({categories}) {
           </a>
           <div className="container bg-white" id="navbarNavDropdown">
             <ul className="col-12 navbar-nav menu-items bg-white border px-2">
-              <li className="nav-item">
-                <a 
-                  className={!router.asPath.includes('category') ? 'nav-link active': 'nav-link'} 
-                  href="/">居家</a>
-              </li>
               {
                 categories && categories.length && categories.map(category => (
                   <li className="nav-item" key={category.id}>
                     <a 
-                      className={router.asPath.includes(`category/${category.slug}`) ? 'nav-link active': 'nav-link'} 
-                      href={`/category/${category.slug}`}>{category.name}</a>
+                      className={router.asPath.includes(`/${category.slug}`) ? 'nav-link active': 'nav-link'} 
+                      href={`/${category.slug}`}>{category.name}</a>
                   </li>
                 ))
               }

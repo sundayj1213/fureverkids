@@ -1,10 +1,10 @@
 import { useCallback, useEffect, useState } from 'react'
-import { getPosts } from '../utils/wordpress.js';
+import { searchPosts } from '../utils/wordpress.js';
 
 import SearchResult from "./post/SearchResult.js";
 
 
-export default function Search({posts}) {
+export default function Search({posts, categories}) {
   const [query, setQuery] = useState('')
   const [active, setActive] = useState(false);
   const [results, setResults] = useState([])
@@ -14,7 +14,7 @@ export default function Search({posts}) {
     setQuery(query)
     if (query.length) {
       setActive(false)
-      const {posts: results} = await getPosts({search: encodeURIComponent(query)});
+      const {posts: results} = await searchPosts(encodeURIComponent(query));
       setActive(true)
       setResults(results)
     } else {
@@ -59,7 +59,7 @@ export default function Search({posts}) {
       {
         active && results ? (
           results.length ? results.sort(() => Math.random() - 0.5).map(post => (
-          <SearchResult post={post} key={post.id}/>
+          <SearchResult categories={categories} post={post} key={post.id}/>
         )): <div>Nothing to show</div>): <div>Searching...</div>
       }
     </div>

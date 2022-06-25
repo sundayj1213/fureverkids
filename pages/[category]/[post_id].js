@@ -16,31 +16,18 @@ export default function PostPage({posts, post}){
     )
 }
 
-//hey Next, these are the possible slugs
-export async function getStaticPaths() {
+export async function getServerSideProps({ query, res, params }) {
+    const result = await getPost(params.post_id);
 
-    const paths = await getSlugs();
-     
-    return {
-        paths,
-        //this option below renders in the server (at request time) pages that were not rendered at build time
-        //e.g when a new blogpost is added to the app
-        fallback: 'blocking'
-    }
-  
-  }
-  
-//access the router, get the id, and get the data for that post
+    res.setHeader(
+        'Cache-Control',
+        'public, s-maxage=10, stale-while-revalidate=59'
+    );
 
-export async function getStaticProps({ params }) {
-
-    const result = await getPost(params.slug);
-    
     return {
         props: {
             ...result,
         },
-        revalidate: 10, // In seconds
     }
 }
 

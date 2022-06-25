@@ -6,7 +6,7 @@ export async function getCategories(args) {
       _embed: '',
       page: 1,
       per_page: 100,
-      exclude: '1,33',
+      exclude: '1',
       ...args
     }).toString();
     const postsRes = await fetch(BASE_URL + "/categories?" + query);
@@ -36,9 +36,20 @@ export async function getPosts(args) {
   }
 }
 
-export async function getPost(slug) {
+export async function searchPosts(query) {
   try {
-    const {posts: postArray} = await getPosts({slug});
+    const postsRes = await fetch(BASE_URL + "/posts?_embed&search=" + query);
+    const posts = await postsRes.json();
+    return { posts };
+  } catch (e) {
+    console.log(e);
+    return {};
+  }
+}
+
+export async function getPost(id) {
+  try {
+    const {posts: postArray} = await getPosts({id});
     const post = postArray.length > 0 ? postArray[0] : null;
 
     return {
@@ -59,7 +70,7 @@ export async function getSlugs() {
   const elementsIds = elements.map((element) => {
     return {
       params: {
-        slug: element.slug,
+        id: element.id,
       },
     };
   });
@@ -72,7 +83,7 @@ export async function getCategoriesSlug() {
   const elementsIds = elements.map((element) => {
     return {
       params: {
-        slug: element.slug,
+        category: element.slug,
       },
     };
   });

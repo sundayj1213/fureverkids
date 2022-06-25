@@ -1,14 +1,14 @@
 import Post from "../Post"
 import Pagination from "./Pagination"
 
-export default function PostList({posts, query, pageCount}) {
+export default function PostList({posts, query, pageCount, categories}) {
   return (
     <>
       {posts.length ? 
         (
           <div className="rounded bg-white">
             {posts.map(post => (
-              <Post post={post} key={post.id}/>
+              <Post post={post} key={post.id} categories={categories} />
             ))}
           </div>
         ): (

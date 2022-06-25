@@ -22,7 +22,7 @@ export default function Header({categories}) {
                 categories && categories.length && categories.map(category => (
                   <li className="nav-item" key={category.id}>
                     <a 
-                      className={router.asPath.includes(`category/${category.name}`) ? 'nav-link active': 'nav-link'} 
+                      className={router.asPath.includes(`category/${category.slug}`) ? 'nav-link active': 'nav-link'} 
                       href={`/category/${category.slug}`}>{category.name}</a>
                   </li>
                 ))

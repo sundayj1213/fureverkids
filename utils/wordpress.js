@@ -50,7 +50,7 @@ export async function searchPosts(query) {
 
 export async function getPost(include) {
   try {
-    const {posts: postArray} = await getPosts({nclude});
+    const {posts: postArray} = await getPosts({id:include});
     const post = postArray && postArray.length > 0 ? postArray[0] : null;
 
     return {

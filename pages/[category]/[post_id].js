@@ -1,9 +1,9 @@
 import RelatedPosts from "../../components/post/RelatedPosts";
 import PostExtras from "../../components/post/PostExtras";
 
-import {getPost, getSlugs} from "../../utils/wordpress";
+import {getPost} from "../../utils/wordpress";
 
-export default function PostPage({posts, post}){
+export default function PostPage({posts, post, categories}){
 
     if(!post || !post.title) return (
         <div className='bg-white min-vh-100 d-flex justify-content-center align-items-center '>
@@ -31,7 +31,7 @@ export default function PostPage({posts, post}){
                 <PostExtras post={post} />
                 <div className="card-text text-secondary mt-3" dangerouslySetInnerHTML={{__html: post.content.rendered}}></div>
             </div>
-            <RelatedPosts posts={posts} />
+            <RelatedPosts posts={posts} categories={categories} />
         </div>
     )
 }

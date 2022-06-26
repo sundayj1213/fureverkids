@@ -16,6 +16,34 @@ export async function getCategories(args) {
   }
 }
 
+export async function getCategoriesPages() {
+  const categories = await getCategories();
+  const pages = [];
+  return new Promise(async resolve => {
+    await Promise.all(categories.map(async (element) => {
+      const result = await getCategoryPost({
+        page: 1,
+        slug: element.slug
+      });
+      pages.push({
+        params: {
+          category: element.slug,
+          slug: result.pageCount.toString(),
+        },
+      });
+      Array.from({length: result.pageCount}, (_, index) => {
+        pages.push({
+          params: {
+            category: element.slug,
+            slug: (index + 1).toString()
+          },
+        });
+      });
+    }));
+    resolve(pages);
+  });
+}
+
 export async function getPosts(args) {
   try {
     const categories = await getCategories();
@@ -27,14 +55,14 @@ export async function getPosts(args) {
      
     const postsRes = await fetch(BASE_URL + "/posts?" + query);
 
-    if(!postsRes.ok) return {categories};
+    if(!postsRes.ok) return {categories, posts: [], pageCount: 0};
 
     const posts = await postsRes.json();
     const pageCount = parseInt(postsRes.headers.get('x-wp-totalpages'), 10);
 
     return { posts, pageCount, categories };
   } catch (e) {
-    return {categories: []};
+    return {categories: [], posts: [], pageCount: 0};
   }
 }
 

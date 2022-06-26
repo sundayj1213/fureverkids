@@ -1,7 +1,7 @@
 import RelatedPosts from "../../components/post/RelatedPosts";
 import PostExtras from "../../components/post/PostExtras";
 
-import {getCategories, getCategoriesSlug, getCategoryPost, getPost} from "../../utils/wordpress";
+import {getCategories, getCategoriesPages, getCategoriesSlug, getCategoryPost, getPost} from "../../utils/wordpress";
 import PostList from "../../components/post/PostList";
 
 export default function PostPage({posts, post, categories, slug, pageCount}){
@@ -42,25 +42,10 @@ export default function PostPage({posts, post, categories, slug, pageCount}){
 }
 
 export async function getStaticPaths() {
-  const pages = [];
-  const elements = await getCategoriesSlug();
-  const categories = await getCategories();
   
-  categories.map(async (element) => {
-    const result = await getCategoryPost({
-      page: 1,
-      slug: element.slug
-    });
-    Array.from({length: result.pageCount}, (_, index) => {
-      pages.push({
-        params: {
-          category: element.slug,
-          slug: (index + 1).toString()
-        },
-      });
-    });
-  });
-
+  const elements = await getCategoriesSlug();
+  const pages = await getCategoriesPages();
+  
   return {
     paths: pages.concat(elements),
     fallback: false

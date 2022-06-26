@@ -1,7 +1,7 @@
 import Post from "../Post"
 import Pagination from "./Pagination"
 
-export default function PostList({posts, query, pageCount, categories}) {
+export default function PostList({posts, page, pageCount, categories}) {  
   return (
     <>
       {posts && posts.length ? 
@@ -29,7 +29,7 @@ export default function PostList({posts, query, pageCount, categories}) {
             </div>
           </div>
       )}
-      <Pagination posts={posts} pageCount={pageCount} query={query}/>
+      <Pagination posts={posts} pageCount={pageCount} page={page}/>
     </>
   )
 }

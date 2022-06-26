@@ -17,20 +17,12 @@ export default function Home(pageProps) {
   )
 }
 
-export async function getServerSideProps(context) {
-  // The query params are set on `context.query`
-  const { query, res } = context
-  res.setHeader(
-    'Cache-Control',
-    'public, s-maxage=10, stale-while-revalidate=59'
-  );
-     
+export async function getStaticProps() {     
   return {
     props: { 
-      query: query,
-      ...await getPosts({
-        ...query
-      })
-    }
+      page: 1,
+      ...await getPosts()
+    },
+    revalidate: 10, // In seconds
   }
 }

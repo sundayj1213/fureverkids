@@ -12,7 +12,7 @@ export async function getCategories(args) {
     const postsRes = await fetch(BASE_URL + "/categories?" + query);
     return await postsRes.json();
   } catch (e) {
-    return {};
+    return [];
   }
 }
 
@@ -24,7 +24,7 @@ export async function getPosts(args) {
       page: 1,
       ...args
     }).toString();
-
+     
     const postsRes = await fetch(BASE_URL + "/posts?" + query);
 
     if(!postsRes.ok) return {categories};
@@ -34,7 +34,7 @@ export async function getPosts(args) {
 
     return { posts, pageCount, categories };
   } catch (e) {
-    return {};
+    return {categories: []};
   }
 }
 
@@ -48,9 +48,9 @@ export async function searchPosts(query) {
   }
 }
 
-export async function getPost(include) {
+export async function getPost(slug) {
   try {
-    const {posts: postArray} = await getPosts({"include[]":include});
+    const {posts: postArray} = await getPosts({slug});
     const post = postArray && postArray.length > 0 ? postArray[0] : null;
 
     return {
@@ -79,15 +79,21 @@ export async function getSlugs() {
 }
 
 export async function getCategoriesSlug() {
-  let elements = await getCategories();
-   
-  const elementsIds = elements.map((element) => {
+  let elements = await getPosts({
+    per_page: 100
+  });
+
+  const elementsIds = elements.posts.map((element) => {
+    const category = elements.categories.find( i => i.id == element.categories[0]);
+     
     return {
       params: {
-        category: element.slug,
+        category: category ? category.slug: '1',
+        slug: decodeURIComponent(element.slug),
       },
     };
   });
+
   return elementsIds;
 }
 
@@ -97,6 +103,7 @@ export async function getCategoryPost({page, slug}) {
     const result = await getCategories({
       slug
     });
+
     const category = result.length > 0 ? result[0] : {};
     
     return await getPosts({

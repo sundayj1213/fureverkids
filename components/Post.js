@@ -7,7 +7,7 @@ export default function Post({post, categories}) {
     
     return (
         <div className="card border-0 mx-3">
-            <a className='border-bottom' href={`/${category.slug}/${post.id}`}>
+            <a className='border-bottom' href={`/${category.slug}/${post.slug}`}>
                 <div className="col-md-12">
                     <div className="card-body mx-4 px-0 py-4">
                         <div className="card-text" dangerouslySetInnerHTML={{__html: post.title.rendered}}></div>

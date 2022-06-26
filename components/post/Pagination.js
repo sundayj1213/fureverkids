@@ -1,6 +1,9 @@
+import {useRouter} from 'next/router';
+
 import ReactPaginate from 'react-paginate';
 
 export default function Pagination(props) {
+  const router = useRouter();
 
   if(!props.pageCount) return <></>;
 
@@ -8,14 +11,18 @@ export default function Pagination(props) {
 
     if(isNaN(page.selected)) return;
 
-    if(page.selected + 1 != props.query.page) {
-      const currentQuery = props.query;
-      currentQuery.page = page.selected ? parseInt(page.selected, 10) + 1: 1;
-      const query = new URLSearchParams({
-        page: currentQuery.page
-      });
-      
-      window.location.href=`?${query.toString()}`;
+    if(page.selected + 1 != props.page) {
+      const _page = (page.selected ? parseInt(page.selected, 10) + 1: 1);
+       
+      if( /^\d+$/.test(router.query.category??'1')) {
+        router.push({
+          pathname: `/${router.query.category}/${_page}`
+        })
+      } else {
+        router.push({
+          pathname: `${_page}`
+        })
+      }
     }
   };
 
@@ -37,7 +44,7 @@ export default function Pagination(props) {
       activeClassName={'active'}
       containerClassName={'text-muted pagination w-100 bg-sm-white p-4 d-flex justify-content-between justify-content-lg-end align-items-center'}
       subContainerClassName={'pages pagination'}
-      initialPage={parseInt(props.query.page, 10) -1}
+      initialPage={parseInt(props.page, 10) -1}
       pageCount={props.pageCount}
       marginPagesDisplayed={2}
       pageRangeDisplayed={5}

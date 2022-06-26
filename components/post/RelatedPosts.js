@@ -9,7 +9,7 @@ export default function RelatedPosts({posts, categories}) {
       {posts.map(post => categories.find( i => i.id == post.categories[0]) && (
       <div className="card border-0 text-secondary" key={post.id}>
         <div className="row">
-            <a className='border-bottom' href={`/${categories.find( i => i.id == post.categories[0]).slug}/${post.id}`}>
+            <a className='border-bottom' href={`/${categories.find( i => i.id == post.categories[0]).slug}/${post.slug}`}>
                 <div className="col-md-12">
                     <div className="card-body px-0 py-1">
                         <div className="card-text" dangerouslySetInnerHTML={{__html: post.title.rendered}}></div>

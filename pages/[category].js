@@ -17,7 +17,7 @@ export async function getStaticPaths() {
       },
     };
   });
-  const pages = Array.from({length: 10*5}, (_, index) => {
+  const pages = Array.from({length: 50}, (_, index) => {
     return {
       params: {
         category: (index + 1).toString()

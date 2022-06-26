@@ -47,7 +47,7 @@ export async function getStaticPaths() {
   const categories = await getCategories();
   
   categories.map((element) => {
-    Array.from({length: 10*5}, (_, index) => {
+    Array.from({length: 50}, (_, index) => {
       pages.push({
         params: {
           category: element.slug,

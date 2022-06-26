@@ -8,16 +8,16 @@ export default function CategoryPage(pageProps){
 }
 
 export async function getStaticPaths() {
-  const elements = await getCategories();
+  const elements = await getPosts();
  
-  const paths = elements.map((element) => {
+  const paths = elements.categories.map((element) => {
     return {
       params: {
         category: element.slug,
       },
     };
   });
-  const pages = Array.from({length: 50}, (_, index) => {
+  const pages = Array.from({length: elements.pageCount}, (_, index) => {
     return {
       params: {
         category: (index + 1).toString()

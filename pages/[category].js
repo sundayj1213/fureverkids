@@ -34,7 +34,7 @@ export async function getStaticProps({params }) {
   let result;
 
   // if not number
-  if(router.category) {
+  if(!/^\d+$/.test(params.category)) {
     result = await getCategoryPost({
       page: 1,
       slug: params.category

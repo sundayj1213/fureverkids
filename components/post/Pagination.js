@@ -14,7 +14,7 @@ export default function Pagination(props) {
     if(page.selected + 1 != props.page) {
       const _page = (page.selected ? parseInt(page.selected, 10) + 1: 1);
        
-      if( /^\d+$/.test(router.query.category??'1')) {
+      if(!/^\d+$/.test(router.query.category??'1')) {
         router.push({
           pathname: `/${router.query.category}/${_page}`
         })

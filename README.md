@@ -5,10 +5,10 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 First, run the development server:
 
 ```sh
-$ git clone git@github.com:sundayj1213/fureverkids.git # or clone your own fork
-$ cd fureverkids
-$ yarn
-$ yarn dev
+git clone git@github.com:sundayj1213/fureverkids.git # or clone your own fork
+cd fureverkids
+yarn
+yarn dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.

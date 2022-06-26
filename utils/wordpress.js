@@ -103,7 +103,7 @@ export async function getCategoryPost({page, slug}) {
     const result = await getCategories({
       slug
     });
-
+ 
     const category = result.length > 0 ? result[0] : {};
     
     return await getPosts({
